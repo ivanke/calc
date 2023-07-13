@@ -2,156 +2,156 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>萬年曆</title>
-    <style>
-        table {
-            border-collapse: collapse;
-        }
+  <meta charset="utf-8">
+  <title>萬年曆-from AI</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
 
-        th,
-        td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ccc;
-        }
+    th,
+    td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
 
-        th {
-            background-color: #f0f0f0;
-        }
+    th {
+      background-color: #f0f0f0;
+    }
 
-        td.today {
-            background-color: #ffffcc;
-        }
-    </style>
+    td.today {
+      background-color: #ffffcc;
+    }
+  </style>
 </head>
 
 <body>
-    <h1>萬年曆</h1>
+  <h1>萬年曆</h1>
 
-    <div>
-        <button onclick="previousMonth()">上個月</button>
-        <span id="currentMonth"></span>
-        <button onclick="nextMonth()">下個月</button>
-    </div>
+  <div>
+    <button onclick="previousMonth()">上個月</button>
+    <span id="currentMonth"></span>
+    <button onclick="nextMonth()">下個月</button>
+  </div>
 
-    <table id="calendar">
-        <thead>
-            <tr>
-                <th>週日</th>
-                <th>週一</th>
-                <th>週二</th>
-                <th>週三</th>
-                <th>週四</th>
-                <th>週五</th>
-                <th>週六</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+  <table id="calendar">
+    <thead>
+      <tr>
+        <th>週日</th>
+        <th>週一</th>
+        <th>週二</th>
+        <th>週三</th>
+        <th>週四</th>
+        <th>週五</th>
+        <th>週六</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
 
-    <script>
-        // 獲取當前日期
-        var today = new Date();
+  <script>
+      // 獲取當前日期
+      var today = new Date();
 
-        // 當前年份
-        var currentYear = today.getFullYear();
+      // 當前年份
+      var currentYear = today.getFullYear();
 
-        // 當前月份，注意月份從 0 開始，所以需要加 1
-        var currentMonth = today.getMonth() + 1;
+      // 當前月份，注意月份從 0 開始，所以需要加 1
+      var currentMonth = today.getMonth() + 1;
 
-        // 顯示當前月份
-        document.getElementById('currentMonth').innerText = currentYear + '年' + currentMonth + '月';
+      // 顯示當前月份
+      document.getElementById('currentMonth').innerText = currentYear + '年' + currentMonth + '月';
 
-        // 生成萬年曆
-        generateCalendar(currentYear, currentMonth);
+      // 生成萬年曆
+      generateCalendar(currentYear, currentMonth);
 
-        // 切換到上個月
-        function previousMonth() {
-            if (currentMonth === 1) {
-                currentYear--;
-                currentMonth = 12;
-            } else {
-                currentMonth--;
-            }
+      // 切換到上個月
+      function previousMonth() {
+          if (currentMonth === 1) {
+              currentYear--;
+              currentMonth = 12;
+          } else {
+              currentMonth--;
+          }
 
-            generateCalendar(currentYear, currentMonth);
-            document.getElementById('currentMonth').innerText = currentYear + '年' + currentMonth + '月';
-        }
+          generateCalendar(currentYear, currentMonth);
+          document.getElementById('currentMonth').innerText = currentYear + '年' + currentMonth + '月';
+      }
 
-        // 切換到下個月
-        function nextMonth() {
-            if (currentMonth === 12) {
-                currentYear++;
-                currentMonth = 1;
-            } else {
-                currentMonth++;
-            }
+      // 切換到下個月
+      function nextMonth() {
+          if (currentMonth === 12) {
+              currentYear++;
+              currentMonth = 1;
+          } else {
+              currentMonth++;
+          }
 
-            generateCalendar(currentYear, currentMonth);
-            document.getElementById('currentMonth').innerText = currentYear + '年' + currentMonth + '月';
-        }
+          generateCalendar(currentYear, currentMonth);
+          document.getElementById('currentMonth').innerText = currentYear + '年' + currentMonth + '月';
+      }
 
-        // 生成指定年份和月份的萬年曆
-        function generateCalendar(year, month) {
-            var calendarTable = document.getElementById('calendar');
-            var tbody = calendarTable.getElementsByTagName('tbody')[0];
+      // 生成指定年份和月份的萬年曆
+      function generateCalendar(year, month) {
+          var calendarTable = document.getElementById('calendar');
+          var tbody = calendarTable.getElementsByTagName('tbody')[0];
 
-            // 清空原有內容
-            tbody.innerHTML = '';
+          // 清空原有內容
+          tbody.innerHTML = '';
 
-            // 獲取指定年份和月份的第一天
-            var firstDay = new Date(year, month - 1, 1);
+          // 獲取指定年份和月份的第一天
+          var firstDay = new Date(year, month - 1, 1);
 
-            // 獲取指定年份和月份的最後一天
-            var lastDay = new Date(year, month, 0);
+          // 獲取指定年份和月份的最後一天
+          var lastDay = new Date(year, month, 0);
 
-            // 獲取指定年份和月份的天數
-            var daysInMonth = lastDay.getDate();
+          // 獲取指定年份和月份的天數
+          var daysInMonth = lastDay.getDate();
 
-            // 獲取指定年份和月份的第一天是星期幾
-            var firstDayOfWeek = firstDay.getDay();
+          // 獲取指定年份和月份的第一天是星期幾
+          var firstDayOfWeek = firstDay.getDay();
 
-            // 填充前面的空白格
-            var row = document.createElement('tr');
-            for (var i = 0; i < firstDayOfWeek; i++) {
-                var td = document.createElement('td');
-                row.appendChild(td);
-            }
+          // 填充前面的空白格
+          var row = document.createElement('tr');
+          for (var i = 0; i < firstDayOfWeek; i++) {
+              var td = document.createElement('td');
+              row.appendChild(td);
+          }
 
-            // 填充日期
-            var currentDate = 1;
-            for (var i = firstDayOfWeek; i < 7; i++) {
-                var td = document.createElement('td');
-                td.innerText = currentDate;
-                if (currentDate === today.getDate() && year === today.getFullYear() && month === today.getMonth() + 1) {
-                    td.classList.add('today');
-                }
-                row.appendChild(td);
-                currentDate++;
-            }
-            tbody.appendChild(row);
+          // 填充日期
+          var currentDate = 1;
+          for (var i = firstDayOfWeek; i < 7; i++) {
+              var td = document.createElement('td');
+              td.innerText = currentDate;
+              if (currentDate === today.getDate() && year === today.getFullYear() && month === today.getMonth() + 1) {
+                  td.classList.add('today');
+              }
+              row.appendChild(td);
+              currentDate++;
+          }
+          tbody.appendChild(row);
 
-            // 填充後面的日期
-            while (currentDate <= daysInMonth) {
-                var newRow = document.createElement('tr');
-                for (var i = 0; i < 7; i++) {
-                    if (currentDate > daysInMonth) {
-                        break;
-                    }
-                    var td = document.createElement('td');
-                    td.innerText = currentDate;
-                    if (currentDate === today.getDate() && year === today.getFullYear() && month === today.getMonth() + 1) {
-                        td.classList.add('today');
-                    }
-                    newRow.appendChild(td);
-                    currentDate++;
-                }
-                tbody.appendChild(newRow);
-            }
-        }
-    </script>
+          // 填充後面的日期
+          while (currentDate <= daysInMonth) {
+              var newRow = document.createElement('tr');
+              for (var i = 0; i < 7; i++) {
+                  if (currentDate > daysInMonth) {
+                      break;
+                  }
+                  var td = document.createElement('td');
+                  td.innerText = currentDate;
+                  if (currentDate === today.getDate() && year === today.getFullYear() && month === today.getMonth() + 1) {
+                      td.classList.add('today');
+                  }
+                  newRow.appendChild(td);
+                  currentDate++;
+              }
+              tbody.appendChild(newRow);
+          }
+      }
+  </script>
 </body>
 
 </html>
